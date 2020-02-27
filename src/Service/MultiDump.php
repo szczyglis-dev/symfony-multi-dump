@@ -21,7 +21,6 @@ use Symfony\Component\VarDumper\Dumper\HtmlDumper;
  */
 class MultiDump implements EventSubscriberInterface
 {
-
     const ALLOW_FOR_ENVIRONMENTS = ['dev'];
 
     /**
@@ -107,7 +106,7 @@ class MultiDump implements EventSubscriberInterface
         $dumper = new HtmlDumper();
         $dumped = '';
         $callbacksOutputs = [];
-        
+
         foreach (self::$vars as $section => $vars) {
             if (isset(self::$callbacks[$section]) && is_array(self::$callbacks[$section])) {
                 foreach (self::$callbacks[$section] as $data) {
