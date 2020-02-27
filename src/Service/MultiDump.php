@@ -413,7 +413,7 @@ class MultiDump implements EventSubscriberInterface
         if (strpos($content, '</body>') !== false) {
             $content = str_replace('</body>', $this->flush() . '</body>', $content);
         } else {
-            $content . $this->flush();
+            $content .= $this->flush();
         }
     }
 
