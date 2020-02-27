@@ -78,7 +78,7 @@ class MultiDump implements EventSubscriberInterface
      */
     private function initDefaults()
     {
-        // You can add or remove dafault items here:
+        // You can add or remove default items here:
 
         self::dump($this->security->getUser(), 'primary', 'user');
         self::dump($this->requestStack, 'primary', 'requestStack');
