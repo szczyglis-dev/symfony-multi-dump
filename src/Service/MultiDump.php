@@ -21,7 +21,7 @@ use Symfony\Component\VarDumper\Dumper\HtmlDumper;
  */
 class MultiDump implements EventSubscriberInterface
 {
-    
+
     const ALLOW_FOR_ENVIRONMENTS = ['dev'];
 
     /**
@@ -101,16 +101,13 @@ class MultiDump implements EventSubscriberInterface
     private function generate()
     {
         $startCounter = $this->countVars();
-
         $this->initDefaults();   
-
         $afterCounter = $this->countVars() - $startCounter;
-
         $cloner = new VarCloner();
         $dumper = new HtmlDumper();
-
         $dumped = '';
         $callbacksOutputs = [];
+        
         foreach (self::$vars as $section => $vars) {
             if (isset(self::$callbacks[$section]) && is_array(self::$callbacks[$section])) {
                 foreach (self::$callbacks[$section] as $data) {
@@ -137,12 +134,10 @@ class MultiDump implements EventSubscriberInterface
             }
 
             foreach ($vars as $k => $data) {
-
                 $dumped .= $this->beginBlock('dumped_item');
 
                 if (!is_null($data['title'])) {
                     $dumped .= $this->beginBlock('subheader') . $data['title'] . $this->endBlock();
-
                 } else {
                     if (isset($data['file']) && isset($data['line'])) {
                         $dumped .= $this->beginBlock('subheader') . basename($data['file']) . ':' . $data['line'] . $this->endBlock();
@@ -167,7 +162,6 @@ class MultiDump implements EventSubscriberInterface
 
             $dumped .= $this->endBlock();
         }
-
         return $dumped;
     }
 
@@ -241,15 +235,12 @@ class MultiDump implements EventSubscriberInterface
      * @return string
      */
     private function flush()
-    {
-        
+    {        
         $dumped = $this->generate();
-
         $counter = '';
         if ($this->counter > 0) {
             $counter = ' ' . $this->counter . ' ';
         }
-
 
         $out = '';
         $out .= '<style>
@@ -369,7 +360,6 @@ class MultiDump implements EventSubscriberInterface
 			}
 		});
     	</script>';
-
         return $out;
     }
 
@@ -405,6 +395,7 @@ class MultiDump implements EventSubscriberInterface
             if (isset($trace[$i]['class'])) $data['class'] = $trace[$i]['class'];
             $data['function'] = $trace[$i]['function'];
         }
+
         self::$vars[$section][] = $data;
     }
 
@@ -446,6 +437,7 @@ class MultiDump implements EventSubscriberInterface
         if ($request->attributes->get('_route') == '_wdt' || $request->attributes->get('_route') == '_profiler' || $this->requestStack->getParentRequest() !== null) {
             return;
         }
+
         $response = $event->getResponse();
         $content = $response->getContent();
         $this->append($content);
