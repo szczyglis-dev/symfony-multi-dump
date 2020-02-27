@@ -442,7 +442,6 @@ class MultiDump implements EventSubscriberInterface
         $this->append($content);
         $response->setContent($content);
         $event->setResponse($response);
-
     }
 
     /**
