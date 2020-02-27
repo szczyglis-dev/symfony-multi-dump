@@ -305,6 +305,9 @@ class MultiDump implements EventSubscriberInterface
 	    	background: #383838;
 	    	cursor: pointer;
 	    }
+        #' . $this->prefix . 'clr {
+            clear:both;
+        }
 	    #' . $this->prefix . 'container .' . $this->prefix . 'col {
 	    	padding:4px 10px;
 	    	font-family: "Lucida Console", Monaco, monospace;
@@ -314,20 +317,11 @@ class MultiDump implements EventSubscriberInterface
 		    float: left;
 		  }
 		}
-		@media only screen and (min-width:768px) {
-		  #' . $this->prefix . 'container .' . $this->prefix . 'col {
-		  	float: left;
-		  }
-		}
-		@media only screen and (min-width:992px) {
-		  #' . $this->prefix . 'container .' . $this->prefix . 'col {
-		  	float: left;
-		  }
-		}
     	</style>';
 
         $out .= $this->beginBlock(null, 'container');
         $out .= $dumped;
+        $out .= $this->beginBlock('clr').$this->endBlock();
         $out .= $this->endBlock();
         $out .= $this->beginBlock(null, 'trigger', ' title="open/close multi-dump window"');
         $out .= '<svg style="vertical-align:middle" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#AAA" d="M12 22.6c-5.8 0-10.5-4.7-10.5-10.5S6.2 1.5 12 1.5 22.5 6.2 22.5 12c0 5.9-4.7 10.6-10.5 10.6zm0-18.1c-4.2 0-7.5 3.4-7.5 7.5 0 4.2 3.4 7.5 7.5 7.5s7.5-3.4 7.5-7.5-3.3-7.5-7.5-7.5z"></path><path fill="#AAA" d="M12 9.1c-.8 0-1.5-.7-1.5-1.5v-6c0-.8.7-1.5 1.5-1.5s1.5.7 1.5 1.5v6c0 .8-.7 1.5-1.5 1.5zm1.5 13.3v-6c0-.8-.7-1.5-1.5-1.5s-1.5.7-1.5 1.5v6c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5zM23.9 12c0-.8-.7-1.5-1.5-1.5h-6c-.8 0-1.5.7-1.5 1.5s.7 1.5 1.5 1.5h6c.8 0 1.5-.7 1.5-1.5zM9.1 12c0-.8-.7-1.5-1.5-1.5h-6c-.8 0-1.5.7-1.5 1.5s.7 1.5 1.5 1.5h6c.8 0 1.5-.7 1.5-1.5z"></path></svg>';
